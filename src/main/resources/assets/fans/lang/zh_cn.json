@@ -1,0 +1,21 @@
+{
+  "item.fans.ravager_foot_skin": "劫掠兽脚皮",
+  "item.fans.flint_and_steel": "打火石",
+  "item.fans.flint_and_steel_food": "打火石",
+
+
+
+  "item.minecraft.potion.effect.charge":"冲撞药水",
+  "item.minecraft.splash_potion.effect.charge": "喷溅型冲撞药水",
+  "item.minecraft.lingering_potion.effect.charge":"滞留型冲撞药水",
+  "item.minecraft.potion.effect.charge_long":"冲撞药水",
+  "item.minecraft.splash_potion.effect.charge_long": "喷溅型冲撞药水",
+  "item.minecraft.lingering_potion.effect.charge_long":"滞留型冲撞药水",
+  "item.minecraft.potion.effect.charge_strong":"冲撞药水",
+  "item.minecraft.splash_potion.effect.charge_strong": "喷溅型冲撞药水",
+  "item.minecraft.lingering_potion.effect.charge_strong":"滞留型冲撞药水",
+
+  "effect.fans.charge":"冲撞",
+
+  "enchantment.fans.burn": "燃烧"
+}

@@ -1,0 +1,14 @@
+{
+  "wow": {
+    "subtitle": "sounds.fans.wow",
+    "sounds": [
+      "fans:wow"
+    ]
+  },
+  "charge": {
+    "subtitle": "sounds.fans.charge",
+    "sounds": [
+      "fans:charge"
+    ]
+  }
+}

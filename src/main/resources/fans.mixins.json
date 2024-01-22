@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "com.fans.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "BurnItemStackDamageMixin",
+    "KickDoorMixin",
+    "WowMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "ChargeCameraMixin"
+  ]
+}

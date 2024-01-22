@@ -1,0 +1,21 @@
+{
+  "item.fans.ravager_foot_skin": "Ravager Foot Skin",
+  "item.fans.flint_and_steel": "Flint And Steel",
+  "item.fans.flint_and_steel_food": "Flint And Steel",
+
+
+
+  "item.minecraft.potion.effect.charge":"Charge Potion",
+  "item.minecraft.splash_potion.effect.charge": "Splash Potion of Charge",
+  "item.minecraft.lingering_potion.effect.charge":"Lingering Potion of Charge",
+  "item.minecraft.potion.effect.charge_long":"Charge Potion",
+  "item.minecraft.splash_potion.effect.charge_long": "Splash Potion of Charge",
+  "item.minecraft.lingering_potion.effect.charge_long":"Lingering Potion of Charge",
+  "item.minecraft.potion.effect.charge_strong":"Charge Potion",
+  "item.minecraft.splash_potion.effect.charge_strong": "Splash Potion of Charge",
+  "item.minecraft.lingering_potion.effect.charge_strong":"Lingering Potion of Charge",
+
+  "effect.fans.charge":"Charge",
+
+  "enchantment.fans.burn": "Burn"
+}
