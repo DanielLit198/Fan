@@ -53,6 +53,7 @@ public class ChargeEffect extends StatusEffect {
 
     @Override
     public void applyUpdateEffect(LivingEntity entity, int amplifier) {
+
         //移动
         Vec3d velocity = entity.getRotationVector();
         if (speed <= 0.3 + amplifier * 0.05){
@@ -83,16 +84,18 @@ public class ChargeEffect extends StatusEffect {
                 HitResult fastRayTraceResult = entity.raycast(v * 3, 0.0F, false);
                 if (fastRayTraceResult instanceof BlockHitResult blockHitResult) {
                     fastBreakBlockPos = new BlockPos(blockHitResult.getBlockPos().getX(), blockHitResult.getBlockPos().getY(), blockHitResult.getBlockPos().getZ());
-                    BlockState state = entity.getWorld().getBlockState(fastBreakBlockPos);
 
                     if (entity.getWorld().getBlockState(fastBreakBlockPos).isFullCube(entity.getWorld(), entity.getBlockPos()) &&
                             entity.getWorld().getBlockState(fastBreakBlockPos).isFullCube(entity.getWorld(), entity.getBlockPos().add(0, -1, 0))) {
-                        entity.setStatusEffect(new StatusEffectInstance(EffectInit.SHAKE, 10, 1), entity);
+                        entity.setStatusEffect(new StatusEffectInstance(EffectInit.SHAKE, 40, 1), entity);
                     }
+
                     if (!entity.getWorld().getBlockState(fastBreakBlockPos).isOf(Blocks.AIR) || !entity.getWorld().getBlockState(fastBreakBlockPos.add(0, -1, 0)).isOf(Blocks.AIR)) {
                         breakBlock(entity.getWorld(),  entity, fastBreakBlockPos, (int) ((v + 1)*3));
+                        impact_ground_particle(entity);
                     }
                 }
+                circleParticle(entity);
             } else {
                 //慢速
                 //方块的获取以及破坏
@@ -156,7 +159,7 @@ public class ChargeEffect extends StatusEffect {
         });
 
         if (entity.getWorld() instanceof ServerWorld serverWorld){
-            serverWorld.spawnParticles(ParticleTypes.CLOUD,entity.getX(),entity.getBoundingBox().getCenter().getY(),entity.getZ(),15,0.3,0.4,0.3,0.01);
+            serverWorld.spawnParticles(ParticleTypes.CLOUD,entity.getX(),entity.getBoundingBox().getCenter().getY(),entity.getZ(),15,0.3,0.3,0.3,0.01);
         }
 
         super.applyUpdateEffect(entity, amplifier);
@@ -212,6 +215,66 @@ public class ChargeEffect extends StatusEffect {
 
     }
 
+    public void impact_ground_particle(LivingEntity entity){
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeInt(entity.getId());
+
+        entity.getWorld().getPlayers().forEach(playerEntity -> {
+            if (playerEntity instanceof ServerPlayerEntity serverPlayer) {
+                ServerPlayNetworking.send(serverPlayer, new Identifier(Fans.MOD,"impact_ground_particle"), buf);
+            }
+        });
+    }
+
+    public void circleParticle(Entity user){
+        World world = user.getWorld();
+        for (int j = 0; j < 4; j++) {
+            if (world.isClient()) return;
+            for (int t = 0; t < 200 + j * 60; t++) {
+                double[] first = circleParticlePoint(user,7 + j * 4,4+j * 12, t);
+                PacketByteBuf bf = PacketByteBufs.create();
+                bf.writeDouble(first[0]);
+                bf.writeDouble(first[1]);
+                bf.writeDouble(first[2]);
+                // 迭代世界上所有追踪位置的玩家，并将数据包发送给每个玩家
+                for (ServerPlayerEntity player : user.getServer().getPlayerManager().getPlayerList()) {
+                    ServerPlayNetworking.send(player, new Identifier(Fans.MOD, "circle_particle"), bf);
+                }
+            }
+        }
+    }
+
+    public double[] circleParticlePoint(Entity user,double h,double k,double t){
+        //h为半径,k:距离,t:循环
+        double a = user.getX() +     user.getRotationVector().getX() * k;
+        double b = user.getY() + 2 + user.getRotationVector().getY() * k;
+        double c = user.getZ() +     user.getRotationVector().getZ() * k;
+        double r = h;
+        double vx = user.getRotationVector().getX();
+        double vy = user.getRotationVector().getY();
+        double vz = user.getRotationVector().getZ();
+        double[] n = {vx,vy,vz};
+        double[] u = {n[1],-n[0],0};
+        double[] v = {(n[1] * u[2])-(n[2] * u[1]),
+                (n[2] * u[0])-(n[0] * u[2]),
+                (n[0] * u[1])-(n[1] * u[0]),
+        };
+        //单位化向量:
+        double us = Math.sqrt((u[0]*u[0])+(u[1]*u[1])+(u[2]*u[2]));
+        double vs = Math.sqrt((v[0]*v[0])+(v[1]*v[1])+(v[2]*v[2]));
+        double[] uu = {u[0]/us,u[1]/us,0};
+        double[] vv = {v[0]/vs,v[1]/vs,v[2]/vs};
+        /*
+        x=x_0+r(cos t)(d/|u|)+r(sin t)(b f-c e)/|v|
+        y=y_0+r(cos t)(e/|u|)+r(sin t)(c d-a f)/|v|
+        z=z_0+r(cos t)(f/|u|)+r(sin t)(a e-b d)/|v|
+         */
+        double x = a + r * Math.cos(t) * uu[0] + r * Math.sin(t) * vv[0];
+        double y = b + r * Math.cos(t) * uu[1] + r * Math.sin(t) * vv[1];
+        double z = c + r * Math.cos(t) * uu[2] + r * Math.sin(t) * vv[2];
+
+        return new double[]{x, y, z};
+    }
     @Override
     public void onRemoved(AttributeContainer attributeContainer) {
         speed = 0.0f;
