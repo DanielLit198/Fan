@@ -1,6 +1,7 @@
 package com.fans.init;
 
 import com.fans.Fans;
+import com.fans.entity.BreakBlockEntity.BreakBlockEntity;
 import com.fans.entity.DoorEntity.DoorEntity;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
@@ -14,6 +15,11 @@ public class EntityInit {
     public static final EntityType<DoorEntity> DOOR_ENTITY = Registry.register(
             Registries.ENTITY_TYPE,new Identifier(Fans.MOD,"door"),
             FabricEntityTypeBuilder.<DoorEntity>create(SpawnGroup.MISC,DoorEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5f,1.8f)).trackRangeBlocks(128).trackedUpdateRate(10).build());
+
+    public static final EntityType<BreakBlockEntity> BREAK_BLOCK = Registry.register(
+            Registries.ENTITY_TYPE,new Identifier(Fans.MOD,"break_block"),
+            FabricEntityTypeBuilder.<BreakBlockEntity>create(SpawnGroup.MISC,BreakBlockEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f,1.8f)).trackRangeBlocks(128).trackedUpdateRate(10).build());
 
     public static void init(){

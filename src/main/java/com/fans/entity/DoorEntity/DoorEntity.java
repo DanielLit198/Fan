@@ -4,18 +4,11 @@ import com.fans.Fans;
 import com.fans.init.EntityInit;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.DoorBlock;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.EndGatewayBlockEntity;
-import net.minecraft.entity.*;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageSources;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
@@ -24,16 +17,9 @@ import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -64,7 +50,6 @@ public class DoorEntity extends PersistentProjectileEntity implements GeoAnimata
                 this.getWorld().addParticle(new ItemStackParticleEffect(ParticleTypes.ITEM, Items.OAK_DOOR.getDefaultStack()), this.getX(), this.getY()+1, this.getZ(), ((double)this.random.nextFloat() - 0.5) * 1, ((double)this.random.nextFloat() - 0.5) * 1, ((double)this.random.nextFloat() - 0.5) * 1);
             }
         }
-
     }
 
     @Override
@@ -104,7 +89,7 @@ public class DoorEntity extends PersistentProjectileEntity implements GeoAnimata
 
     @Override
     public void tick() {
-        setPitch(getPitch()-10);
+        setPitch(getPitch()-1);
         if (!this.getWorld().isClient()) {
             PacketByteBuf buf = PacketByteBufs.create();
             buf.writeString(type);

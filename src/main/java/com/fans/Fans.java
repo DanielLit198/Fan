@@ -18,5 +18,6 @@ public class Fans implements ModInitializer {
 		EffectInit.init();
 		PotionInit.init();
 		ItemGroupInit.init();
+		ParticleInit.init();
 	}
 }

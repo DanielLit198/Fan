@@ -5,15 +5,15 @@
 
 
 
-  "item.minecraft.potion.effect.charge":"冲撞药水",
-  "item.minecraft.splash_potion.effect.charge": "喷溅型冲撞药水",
-  "item.minecraft.lingering_potion.effect.charge":"滞留型冲撞药水",
-  "item.minecraft.potion.effect.charge_long":"冲撞药水",
-  "item.minecraft.splash_potion.effect.charge_long": "喷溅型冲撞药水",
-  "item.minecraft.lingering_potion.effect.charge_long":"滞留型冲撞药水",
-  "item.minecraft.potion.effect.charge_strong":"冲撞药水",
-  "item.minecraft.splash_potion.effect.charge_strong": "喷溅型冲撞药水",
-  "item.minecraft.lingering_potion.effect.charge_strong":"滞留型冲撞药水",
+  "item.minecraft.potion.effect.charge":"冲击药水",
+  "item.minecraft.splash_potion.effect.charge": "喷溅型冲击药水",
+  "item.minecraft.lingering_potion.effect.charge":"滞留型冲击药水",
+  "item.minecraft.potion.effect.charge_long":"冲击药水",
+  "item.minecraft.splash_potion.effect.charge_long": "喷溅型冲击药水",
+  "item.minecraft.lingering_potion.effect.charge_long":"滞留型冲击药水",
+  "item.minecraft.potion.effect.charge_strong":"冲击药水",
+  "item.minecraft.splash_potion.effect.charge_strong": "喷溅型冲击药水",
+  "item.minecraft.lingering_potion.effect.charge_strong":"滞留型冲击药水",
 
   "effect.fans.charge":"冲撞",
 

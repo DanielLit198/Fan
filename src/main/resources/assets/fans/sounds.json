@@ -10,5 +10,35 @@
     "sounds": [
       "fans:charge"
     ]
+  },
+  "agitated": {
+    "subtitle": "sounds.fans.agitated",
+    "sounds": [
+      "fans:agitated"
+    ]
+  },
+  "roar": {
+    "subtitle": "sounds.fans.roar",
+    "sounds": [
+      "fans:roar"
+    ]
+  },
+  "ambient": {
+    "subtitle": "sounds.fans.ambient",
+    "sounds": [
+      "fans:ambient"
+    ]
+  },
+  "listening": {
+    "subtitle": "sounds.fans.listening",
+    "sounds": [
+      "fans:listening"
+    ]
+  },
+  "angry": {
+    "subtitle": "sounds.fans.angry",
+    "sounds": [
+      "fans:angry"
+    ]
   }
 }

@@ -13,16 +13,16 @@ import net.minecraft.util.Identifier;
 import static com.fans.mixin.BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe;
 
 public class PotionInit {
-    public static final Potion CHARGE = registerPotion("charge",EffectInit.CHARGE,20,0);
-    public static final Potion CHARGE_STRONG = registerPotion("charge_strong",EffectInit.CHARGE,40,1);
-    public static final Potion CHARGE_LONG = registerPotion("charge_long",EffectInit.CHARGE,60,0);
+    public static final Potion CHARGE = registerPotion("charge",EffectInit.CHARGE,200,0);
+    public static final Potion CHARGE_STRONG = registerPotion("charge_strong",EffectInit.CHARGE,200,1);
+    public static final Potion CHARGE_LONG = registerPotion("charge_long",EffectInit.CHARGE,400,0);
 
     public static Potion registerPotion(String name, StatusEffect effect, int time, int level){
         return Registry.register(Registries.POTION,new Identifier(Fans.MOD,name),
                 new net.minecraft.potion.Potion(new StatusEffectInstance(effect,time,level)));
     }
     public static void init(){
-//        registerPotionRecipes();
+        registerPotionRecipes();
     }
     public static void registerPotionRecipes(){
         invokeRegisterPotionRecipe(Potions.AWKWARD,ItemInit.RAVAGER_FOOT_SKIN,PotionInit.CHARGE);
